@@ -409,6 +409,32 @@ acc add 早餐 -25 --tags 早餐 食堂
    sqlite3 ~/.accounting/data/accounting.db
    ```
 
+## 开发路线图
+
+### 🚀 进行中
+- [ ] **FastAPI 后端** - 为 AccountingService 封装 REST API（支持 Web/移动端前端）
+- [ ] **React Web 界面** - 现代化 Web 界面，可视化财务数据
+
+### 📋 计划中
+- [ ] 桌面 GUI（PySide6 / Tauri）
+- [ ] 更多银行导入插件
+- [ ] 订阅管理功能增强
+- [ ] 预算提醒与通知
+- [ ] 小票 OCR 识别集成
+- [ ] 移动端 App（React Native / Flutter）
+
+### ✅ 已完成
+- [x] 核心记账引擎（倒推余额算法）
+- [x] 多账户管理
+- [x] 支付宝、微信 CSV 导入器
+- [x] 自定义导入器插件架构
+- [x] Ollama AI 集成（对话分析、报告、预算建议）
+- [x] 基于 embedding 的语义搜索
+- [x] 数据导入/导出（JSON/CSV）
+- [x] 备份管理系统
+- [x] 完整测试套件（25个测试用例）
+- [x] GitHub Actions CI/CD
+
 ## 从旧版本迁移
 
 如果你之前使用过旧版本（数据在项目目录下），运行迁移脚本：

@@ -310,6 +310,32 @@ class MyBankImporter(BaseImporter):
 
 See [PLUGIN_ARCHITECTURE.md](PLUGIN_ARCHITECTURE.md) for complete documentation.
 
+## Roadmap & TODO
+
+### 🚀 In Progress
+- [ ] **FastAPI Backend** - REST API wrapper for AccountingService (enables web/mobile frontends)
+- [ ] **React Web UI** - Modern web interface for visualizing finances
+
+### 📋 Planned
+- [ ] Desktop GUI (PySide6 / Tauri)
+- [ ] More bank importer plugins
+- [ ] Subscription management enhancement
+- [ ] Budget alerts and notifications
+- [ ] Receipt OCR integration
+- [ ] Mobile app (React Native / Flutter)
+
+### ✅ Completed
+- [x] Core accounting engine with reverse balance calculation
+- [x] Multi-account management
+- [x] Alipay & WeChat CSV importers
+- [x] Plugin architecture for custom importers
+- [x] Ollama AI integration (chat analysis, reports, budget advice)
+- [x] Semantic search with embeddings
+- [x] Data import/export (JSON/CSV)
+- [x] Backup management system
+- [x] Full test suite (25 tests)
+- [x] GitHub Actions CI/CD
+
 ## Development & Testing
 
 ### Running Tests
