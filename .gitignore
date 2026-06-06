@@ -68,3 +68,6 @@ temp/
 
 # macOS resource fork files (._*)
 ._*
+
+# AI agent collaboration guide (private, not for public repo)
+agent.md
