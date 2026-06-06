@@ -1,0 +1,97 @@
+"""
+示例导入器插件 - 支持招商银行账单导入
+
+将此文件复制为 cmb_importer.py（或其他名称），放在 ~/.accounting/plugins/ 目录下，
+系统会自动发现并加载此插件。
+"""
+from typing import List, Dict
+from pathlib import Path
+from src.importers.base import BaseImporter, ImportResult
+
+
+class CMBImporter(BaseImporter):
+    """招商银行 CSV 导入器示例"""
+    
+    # 必填：导入器唯一标识（用于命令行指定）
+    name = "cmb"
+    
+    # 必填：显示名称（用于 UI 展示）
+    display_name = "招商银行"
+    
+    def can_handle(self, filepath: str) -> bool:
+        """
+        检测是否为招商银行 CSV 文件
+        
+        Args:
+            filepath: CSV 文件路径
+            
+        Returns:
+            True 如果能处理此文件
+        """
+        try:
+            with open(filepath, 'r', encoding='utf-8-sig') as f:
+                first_line = f.readline().strip()
+                # 根据文件特征检测（如包含特定关键词）
+                return "招商银行" in first_line or "CMB" in first_line
+        except Exception:
+            return False
+    
+    def import_file(self, filepath: str, mode: str = "skip") -> ImportResult:
+        """
+        导入招商银行 CSV 文件
+        
+        Args:
+            filepath: CSV 文件路径
+            mode: 重复处理模式 (skip/replace/keep_both)
+            
+        Returns:
+            ImportResult 包含导入统计
+        """
+        result = ImportResult()
+        
+        try:
+            # 1. 读取并解析 CSV
+            rows = self._read_csv_with_encoding_detection(filepath)
+            
+            # 2. 跳过表头/注释行
+            # ... 根据实际格式处理
+            
+            # 3. 遍历交易记录
+            for row in rows:
+                result.total += 1
+                
+                try:
+                    # 解析单条交易
+                    # date = self._normalize_date(row['交易时间'])
+                    # amount = self._parse_amount(row['金额'])
+                    # description = row['交易摘要']
+                    # category = self._infer_category(description, amount)
+                    
+                    # 4. 去重检查（如果 mode == 'skip'）
+                    # if mode == 'skip' and self._is_duplicate(...):
+                    #     result.skipped += 1
+                    #     continue
+                    
+                    # 5. 插入数据库
+                    # self._insert_transaction_no_recalc(...)
+                    
+                    result.success += 1
+                    
+                except Exception as e:
+                    result.failed += 1
+                    result.errors.append(f"行 {result.total}: {str(e)}")
+            
+            # 6. 重新计算余额（如果需要）
+            # ...
+            
+        except Exception as e:
+            result.errors.append(f"读取文件失败: {str(e)}")
+        
+        return result
+
+
+# 如果需要多个导入器，可以在同一个文件中定义多个类
+# class ICBCImporter(BaseImporter):
+#     name = "icbc"
+#     display_name = "工商银行"
+#     ...
